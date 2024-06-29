@@ -1,0 +1,53 @@
+<div class="container">
+    <form action="" (ngSubmit)="onSubmit(register)" #register="ngForm" #form
+    
+    >
+        <div id="user-data" ngModelGroup="userdata">
+            <div class="form-group">
+                <label for="username">username</label>
+                <input type="text" #username="ngModel" required ngModel name="username" id="username"
+                    class="form-control">
+                <div *ngIf="username.dirty && username.errors">
+                    <small class="text-danger" *ngIf="username.dirty && username.touched">enter correct </small>
+                    <small class="text-danger" *ngIf="username.dirty && username.touched">enter correct </small>
+                   
+                </div>
+            </div>
+            <br>
+            <button class="btn btn-primary" (click)="suggestName()">Suggest Name</button>
+            <br>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="email" required email #mail="ngModel" ngModel name="Email" id="Email" class="form-control">
+                <div *ngIf="mail.touched && mail.errors">
+                    <small class="text-danger" *ngIf=" mail.errors['required']">enter is required </small>
+                    <small class="text-danger" *ngIf=" mail.errors['email']">enter is email </small>
+                    <small class="text-danger" *ngIf="mail.dirty">enter dirty </small>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="username">Secret Question</label>
+                <select name="secret" ngModel id="secret" [(ngModel)]="DefulatQuestiton" class="form-control" required>
+                    <option value="teacher">You frist teacher!</option>
+                    <option value="doctor">You frist doctor!</option>
+                </select>
+            </div>
+            <br>
+            <div class="form-group">
+                <textarea name="QuAs"
+                class="form-control"
+                [(ngModel)]="QuAs" id="" rows="3"></textarea>
+                <p>ur reply answer is {{QuAs}}</p>
+            </div>
+            <br>
+            <div class="radio" *ngFor="let gender of genders">
+                <input type="radio" name="gender" id="" ngModel [value]="gender">
+                {{gender}}
+            </div>
+            <br>
+            <!-- {{form.className}} -->
+            <button type="submit" class="btn btn-success" [disabled]="!register.valid">Submit</button>
+        </div>
+    </form>
+</div>

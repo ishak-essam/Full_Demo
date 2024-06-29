@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="row">
+    <ng-content *ngIf="product; else Rject" ></ng-content>
+    <ng-template #Rject>
+      <h1>No Data</h1>
+    </ng-template>
+  </div>
+</div>

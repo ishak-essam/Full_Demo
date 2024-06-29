@@ -1,0 +1,38 @@
+<div class="container">
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            Search: <input type="text" class="form-control" [(ngModel)]="filterStatus" id="">
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-primary" (click)="AddServer()">Add Server</button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-ms-12 col-sm-12 col-md-12">
+
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let server of servers| filter:filterStatus:'status'"
+                    [ngClass]="getStatus(server)">
+                    <span class="badge bg-primary float-end">{{server.status}}</span>
+                    <strong>{{server.name|shorten:6}}</strong> | {{server.budget|currency:'EUR'}} |
+                    {{server.instanceType|uppercase}} |
+                    {{server.started|date}} | {{server.LoadTime|number:'1.2-3'}} S
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+BehaviorSubject wihtout async {{BehaviorSubject}}
+BehaviorSubject wiht async {{BehaviorSubject|async}}
+<br>
+SubjectStatus wihtout async {{SubjectStatus}}
+SubjectStatus wiht async {{SubjectStatus|async}}
+<br>
+ObservableStatus wihtout async {{ObservableStatus}}
+ObservableStatus wiht async {{ObservableStatus|async}}
