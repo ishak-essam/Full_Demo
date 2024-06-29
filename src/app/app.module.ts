@@ -16,6 +16,9 @@ import { ReactiveFormsComponent } from './reactive-forms/reactive-forms.componen
 import { PipesComponent } from './pipes/pipes.component';
 import { ShortenPipe } from './pipes/shorten.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { PostsComponent } from './posts/posts.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { authInterceptService } from './interceptor/auth.interceptor.service';
 
 @NgModule({
   declarations: [
@@ -32,9 +35,19 @@ import { FilterPipe } from './pipes/filter.pipe';
     PipesComponent,
     ShortenPipe,
     FilterPipe,
+    PostsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule,ReactiveFormsModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: authInterceptService, multi: true },
+  ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

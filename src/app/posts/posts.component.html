@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row">
+        <div class="row col-md-12">
+            <form #postForm="ngForm" (ngSubmit)="PostForm(postForm)">
+                <div class="form-group">
+                    <label for="title">title</label>
+                    <input type="text" required ngModel name="title" id="title" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="content">content</label>
+                    <input type="text" id="content" required ngModel name="content" class="form-control">
+                </div>
+                <button class="btn btn-primary  my-1" type="submit" [disabled]="postForm.invalid">Create</button>
+            </form>
+            <hr>
+            <div class="row my-1">
+                <div class=" col-md-12">
+                    <button class="btn btn-success w-auto float-end " (click)="getAllPosts()">Get all posts</button>
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class=" col-md-12">
+                    <button class="btn btn-danger w-auto float-end" (click)="OnClearPosts()">Clearposts</button>
+                </div>
+            </div>
+            <br>
+
+            <div class="row ">
+                <div class="col-md-12">
+                    <p *ngIf="loadPost.length<1&&!load">No posts available</p>
+                    <ul class="list-group" *ngIf="loadPost.length>=1 &&!load">
+                        <li class="list group item" *ngFor="let post of loadPost">
+                            <h1>{{post.title}}</h1>
+                            <p>{{post.content}}</p>
+                        </li>
+                    </ul>
+                    <p *ngIf="load &&!error">Loading ................</p>
+                    <div class="alert text-danger" *ngIf="error">
+                        <h1>An error</h1>
+                        <p> {{error}}</p>
+                        <button class="btn btn-success" (click)="OnHandleError()">No error</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
