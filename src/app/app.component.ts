@@ -2,6 +2,7 @@ import {
   AfterViewChecked,
   AfterViewInit,
   Attribute,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   OnChanges,
@@ -31,9 +32,10 @@ export class AppComponent implements OnInit, OnChanges {
   OnActive: boolean;
   numSize: number = 4;
   ProductsApp: Product[] = [];
-
+  totalProduct = this.ProductsApp.length;
   constructor(
     private services: ServicesService,
+    private chaangeDectectionRef: ChangeDetectorRef,
     private productService: ProductService,
     @Attribute('ChangeLevel') ex: string
   ) {
@@ -42,17 +44,30 @@ export class AppComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log('ngOnChanges :');
     console.log(changes);
+    this.chaangeDectectionRef.markForCheck();
   }
+  localList = [
+    {
+      code: 'en-us',
+      label: 'english',
+    },{
+      code: 'ar',
+      label: 'arabic',
+    },
+  ];
   ngOnInit(): void {
     this.ViewProducts(this.numSize);
+
     this.services.ActiveEmitter.subscribe((ele) => (this.OnActive = ele));
     this.services.ActiveSubject.subscribe((ele) => (this.OnActive = ele));
   }
   ViewProducts(size: number) {
     this.productService.getProducts().subscribe((ele: Product[]) => {
       this.ProductsApp = ele;
-      console.log(ele);
+      this.totalProduct = this.ProductsApp.length;
     });
+    console.log(this.totalProduct);
+    console.log(this.ProductsApp.length);
     // for (let index = 1; index <= size; index++) {
     //   var Product: Product = {
     //     Id: index,

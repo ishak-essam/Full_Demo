@@ -17,7 +17,19 @@
   </div>
 </nav>
  -->
-<h3 i18n>Welcome</h3>
+<ul>
+  <li *ngFor="let local of localList">
+    <a href="/{{local.code}}">    {{local.label}}</a>
+
+  </li>
+</ul>
+<h3 i18n="welcome 11| trasnsalting meain@@welcomeMessage">Welcome</h3>
+<h3 i18n>
+  {totalProduct ,plural ,
+  =0 {no product available}
+  =1 {one product available}
+  other {Total {{totalProduct}} available}}
+</h3>
 <div class="container py-5">
   <div class="row" #div>
     @if(addproduct==true){
@@ -38,11 +50,11 @@
     <img src="../../assets/images/{{ ProductsApp[0].Image }}" #image width="300" />
     <button class="btn btn-primary" (click)="changeEffact()">changes</button>-->
     @for (item of ProductsApp; track item.Id;let i=$index ) {
-    <app-product [product]="item" [name]="item.Name"  ChangeLevel="'nkjbk'">
+    <app-product [product]="item" [name]="item.Name" ChangeLevel="'nkjbk'">
       <!-- <div #highlighter="highlight" class="card p-1 m-1 col-4" appHighlighted [highlighted]="true"
         (toggleHiglight)="onToggle($event)" style="width: 18rem" [ngClass]="i % 2 == 0 ? 'row' : ''">
        -->
-        <div  class="card p-1 m-1 col-4"[ngClass]="i % 2 == 0 ? 'row' : ''"  >
+      <div class="card p-1 m-1 col-4" [ngClass]="i % 2 == 0 ? 'row' : ''">
         <img src="../../assets/images/{{ item.Image }}" #image class="card-img-top" style="height: 10rem" alt="..." />
         <div class="card-body">
           <div class="d-flex align-items-center justify-content-between">
@@ -50,7 +62,7 @@
 
             <!-- <button type="button" class="card-title btn btn-primary text-light" (dblclick)="highlighter.toggle()">
               {{ item.Price }}
-            </button> -->  <button type="button" class="card-title btn btn-primary text-light" >
+            </button> --> <button type="button" class="card-title btn btn-primary text-light">
               {{ item.Price }}
             </button>
           </div>

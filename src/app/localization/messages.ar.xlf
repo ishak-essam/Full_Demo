@@ -15,6 +15,9 @@
         <source>{VAR_PLURAL, plural, =0 {no product available} |
   =1 {one product available} |
   other {Total <x id="INTERPOLATION"/> available}}</source>
+  <target>{VAR_PLURAL, plural, =0 {لا يوجد عناصر  } |
+    =1 {  يوجد عنصر واحد فقط} |
+    other {كل العناصر <x id="INTERPOLATION"/> المتاح}}</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">21,25</context>
