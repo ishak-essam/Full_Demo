@@ -16,11 +16,12 @@
     </ul>
   </div>
 </nav>
-
+ -->
+<h3 i18n>Welcome</h3>
 <div class="container py-5">
   <div class="row" #div>
     @if(addproduct==true){
-    <button type="submit" class="btn btn-primary mb-3 w-auto" (click)="toggleAddProduct()">
+    <button type="submit" class="btn btn-primary mb-3 w-auto" (click)="toggleAddProduct()" i18n>
       Add Product
     </button>
     <button type="submit" class="btn btn-primary mx-1 mb-3 w-auto" [routerLink]="['employee',12]">
@@ -32,42 +33,47 @@
     <div class="col-md-8">
       <router-outlet></router-outlet>
     </div>
-    <app-products [Products]="ProductsApp" [name]="ProductsApp[0].Name">
-    </app-products>
+    <!-- <app-products [Products]="ProductsApp" [name]="ProductsApp[0].Name">
+    </app-products> 
     <img src="../../assets/images/{{ ProductsApp[0].Image }}" #image width="300" />
-    <button class="btn btn-primary" (click)="changeEffact()">changes</button>
-    <app-product [product]="ProductsApp[0]" [name]="ProductsApp[0].Name">
-      @for (item of ProductsApp; track item.Id;let i=$index ) {
-      <div #highlighter="highlight" class="card p-1 m-1 col-4" appHighlighted [highlighted]="true"
-        (toggleHiglight)="onToggle($event)" style="width: 18rem" [ngClass]="i % 3 == 0 ? 'row' : ''">
+    <button class="btn btn-primary" (click)="changeEffact()">changes</button>-->
+    @for (item of ProductsApp; track item.Id;let i=$index ) {
+    <app-product [product]="item" [name]="item.Name"  ChangeLevel="'nkjbk'">
+      <!-- <div #highlighter="highlight" class="card p-1 m-1 col-4" appHighlighted [highlighted]="true"
+        (toggleHiglight)="onToggle($event)" style="width: 18rem" [ngClass]="i % 2 == 0 ? 'row' : ''">
+       -->
+        <div  class="card p-1 m-1 col-4"[ngClass]="i % 2 == 0 ? 'row' : ''"  >
         <img src="../../assets/images/{{ item.Image }}" #image class="card-img-top" style="height: 10rem" alt="..." />
         <div class="card-body">
           <div class="d-flex align-items-center justify-content-between">
             <h3 class="card-title">{{ item.Name }}</h3>
 
-            <button type="button" class="card-title btn btn-primary text-light" (dblclick)="highlighter.toggle()">
+            <!-- <button type="button" class="card-title btn btn-primary text-light" (dblclick)="highlighter.toggle()">
+              {{ item.Price }}
+            </button> -->  <button type="button" class="card-title btn btn-primary text-light" >
               {{ item.Price }}
             </button>
           </div>
+          <button class="btn btn-success" (click)="onMute()">Change Desc</button>
           <p class="card-text">
             {{ item.Description }}
           </p>
         </div>
       </div>
-      } @empty {
-      <h2 class="text-center text-dark">No Products</h2>
-      }
     </app-product>
-    } @else{
+    } @empty {
+    <h2 class="text-center text-dark">No Products</h2>
+    }
+    }
+    @else{
     <app-addproduct (ProductAdd)="OnAddProduct($event)"></app-addproduct>
     }
   </div>
 </div>
 <hr>
 <p *ngIf="OnActive">Active P</p>
- -->
 <!-- <app-tdf></app-tdf> -->
 <!-- <app-reactive-forms></app-reactive-forms> -->
 <!-- <router-outlet></router-outlet> -->
- <!-- <app-pipes> </app-pipes> -->
-  <app-posts></app-posts>
+<!-- <app-pipes> </app-pipes> -->
+<app-posts></app-posts>
