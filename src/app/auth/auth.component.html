@@ -1,0 +1,4 @@
+<div class="col-xs-12 col-md-6 offset-3">
+    <app-alert [message]="error" *ngIf="error" (closeBtn)="OncloseBtn()"></app-alert>
+</div>
+<button class="btn btn-primary" (click)="raiseError()">Raise error</button>

@@ -19,21 +19,31 @@
  -->
 <ul>
   <li *ngFor="let local of localList">
-    <a href="/{{local.code}}">    {{local.label}}</a>
+    <a href="/{{local.code}}"> {{local.label}}</a>
 
   </li>
 </ul>
-<h3 i18n="welcome 11| trasnsalting meain@@welcomeMessage">Welcome</h3>
-<h3 i18n>
+<!-- <div style="border: 1px solid black; height: 900px;"></div> -->
+<!-- <button #displayData>display Data</button>
+<div #hoverDiv style="border: 1px solid black; height: 200px; margin: 20px;">
+</div> -->
+
+
+<!-- @defer (on timer(5s); prefetch on timer(5s) ) { -->
+<!-- @defer (on interaction(displayData); prefetch on timer(5s);on hover(hoverDiv) ) { -->
+<!-- @defer (  on interaction (displayData) ) { -->
+
+<!-- <h3 i18n="welcome 11| trasnsalting meain@@welcomeMessage">Welcome</h3> -->
+<!-- <h3 i18n>
   {totalProduct ,plural ,
   =0 {no product available}
   =1 {one product available}
   other {Total {{totalProduct}} available}}
-</h3>
-<div class="container py-5">
+</h3> -->
+<!-- <div class="container py-5">
   <div class="row" #div>
-    @if(addproduct==true){
-    <button type="submit" class="btn btn-primary mb-3 w-auto" (click)="toggleAddProduct()" i18n>
+    @if(addproduct==true){ -->
+<!-- <button type="submit" class="btn btn-primary mb-3 w-auto" (click)="toggleAddProduct()" i18n>
       Add Product
     </button>
     <button type="submit" class="btn btn-primary mx-1 mb-3 w-auto" [routerLink]="['employee',12]">
@@ -45,24 +55,26 @@
     <div class="col-md-8">
       <router-outlet></router-outlet>
     </div>
-    <!-- <app-products [Products]="ProductsApp" [name]="ProductsApp[0].Name">
+    <app-auth></app-auth> -->
+<!-- <app-products [Products]="ProductsApp" [name]="ProductsApp[0].Name">
     </app-products> 
     <img src="../../assets/images/{{ ProductsApp[0].Image }}" #image width="300" />
     <button class="btn btn-primary" (click)="changeEffact()">changes</button>-->
-    @for (item of ProductsApp; track item.Id;let i=$index ) {
-    <app-product [product]="item" [name]="item.Name" ChangeLevel="'nkjbk'">
-      <!-- <div #highlighter="highlight" class="card p-1 m-1 col-4" appHighlighted [highlighted]="true"
-        (toggleHiglight)="onToggle($event)" style="width: 18rem" [ngClass]="i % 2 == 0 ? 'row' : ''">
-       -->
-      <div class="card p-1 m-1 col-4" [ngClass]="i % 2 == 0 ? 'row' : ''">
+
+<!-- @for (item of ProductsApp; track item.Id;let i=$index ) {
+    <app-product [product]="item" [name]="item.Name" ChangeLevel="'nkjbk'"> -->
+<!-- <div #highlighter="highlight" class="card p-1 m-1 col-4" appHighlighted [highlighted]="true"
+            (toggleHiglight)="onToggle($event)" style="width: 18rem" [ngClass]="i % 2 == 0 ? 'row' : ''">
+           -->
+<!-- <div class="card p-1 m-1 col-4" [ngClass]="i % 2 == 0 ? 'row' : ''">
         <img src="../../assets/images/{{ item.Image }}" #image class="card-img-top" style="height: 10rem" alt="..." />
         <div class="card-body">
           <div class="d-flex align-items-center justify-content-between">
-            <h3 class="card-title">{{ item.Name }}</h3>
+            <h3 class="card-title">{{ item.Name }}</h3> -->
 
-            <!-- <button type="button" class="card-title btn btn-primary text-light" (dblclick)="highlighter.toggle()">
-              {{ item.Price }}
-            </button> --> <button type="button" class="card-title btn btn-primary text-light">
+<!-- <button type="button" class="card-title btn btn-primary text-light" (dblclick)="highlighter.toggle()">
+                  {{ item.Price }}
+                </button> <button type="button" class="card-title btn btn-primary text-light">
               {{ item.Price }}
             </button>
           </div>
@@ -73,19 +85,40 @@
         </div>
       </div>
     </app-product>
-    } @empty {
+    } 
+    -->
+<!-- @empty {
     <h2 class="text-center text-dark">No Products</h2>
+    } 
+
+
+
     }
-    }
-    @else{
-    <app-addproduct (ProductAdd)="OnAddProduct($event)"></app-addproduct>
+    @else{ <app-addproduct (ProductAdd)="OnAddProduct($event)"></app-addproduct>
     }
   </div>
 </div>
-<hr>
-<p *ngIf="OnActive">Active P</p>
+<hr>-->
+<!-- <p *ngIf="OnActive">Active P</p> -->
 <!-- <app-tdf></app-tdf> -->
 <!-- <app-reactive-forms></app-reactive-forms> -->
 <!-- <router-outlet></router-outlet> -->
 <!-- <app-pipes> </app-pipes> -->
-<app-posts></app-posts>
+<!-- <app-posts></app-posts>
+}
+@placeholder {
+<p>placeholder</p>
+}
+@loading(minimum 3s; after 5s){
+<p>loading</p>
+} -->
+<!-- @placeholder(minimum 3s) {
+<p>asndihudiasuidhisadasdasdsadsa</p>
+} -->
+
+<div>
+  <h4>Counter is {{counterService.counter()}}</h4>
+  <h4>ComputedCounter is {{ComputedCounter()}}</h4>
+  <button class="btn btn-primary mx-1" (click)="increment()">Increment</button>
+  <button class="btn btn-primary mx-1" (click)="CancleEffectFun()">CancleEffectFun</button>
+</div>

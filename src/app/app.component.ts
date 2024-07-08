@@ -2,8 +2,10 @@ import {
   AfterViewChecked,
   AfterViewInit,
   Attribute,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  EffectRef,
   ElementRef,
   OnChanges,
   OnInit,
@@ -11,20 +13,26 @@ import {
   SimpleChanges,
   ViewChild,
   ViewChildren,
+  computed,
+  effect,
+  signal,
 } from '@angular/core';
 import { Product } from './Interface/Product';
 import { ProductsComponent } from './products/products.component';
 import { ServicesService } from './serivce/services.service';
 import { ProductService } from './serivce/product.service';
+import { CounterService } from './counter.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
+  // changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit, OnChanges {
   @ViewChild(ProductsComponent, { read: ElementRef }) products: ElementRef;
   @ViewChildren(ProductsComponent, { read: ElementRef })
+  CancleEffect: EffectRef;
   productsCh: QueryList<ElementRef>;
   ChangeLevel: string;
   @ViewChild('div') div: ElementRef;
@@ -35,12 +43,28 @@ export class AppComponent implements OnInit, OnChanges {
   totalProduct = this.ProductsApp.length;
   constructor(
     private services: ServicesService,
+    public counterService: CounterService,
     private chaangeDectectionRef: ChangeDetectorRef,
     private productService: ProductService,
     @Attribute('ChangeLevel') ex: string
   ) {
     console.log('ChangeLevel', ex);
+    this.CancleEffect = effect(
+      () => {
+        const counter = this.counter();
+        const ComputedCounter = this.ComputedCounter();
+        console.log(
+          `Counter is ${counter}, ComputedCounter is  ${ComputedCounter} `
+        );
+        localStorage.setItem(
+          'value',
+          `Counter is ${counter}, ComputedCounter is  ${ComputedCounter} `
+        );
+      },
+      { manualCleanup: true }
+    );
   }
+
   ngOnChanges(changes: SimpleChanges): void {
     console.log('ngOnChanges :');
     console.log(changes);
@@ -50,11 +74,15 @@ export class AppComponent implements OnInit, OnChanges {
     {
       code: 'en-us',
       label: 'english',
-    },{
+    },
+    {
       code: 'ar',
       label: 'arabic',
     },
   ];
+  CancleEffectFun() {
+    this.CancleEffect.destroy();
+  }
   ngOnInit(): void {
     this.ViewProducts(this.numSize);
 
@@ -102,5 +130,17 @@ export class AppComponent implements OnInit, OnChanges {
   }
   onMute() {
     this.ProductsApp[0].Description = 'Hello With Isaac';
+  }
+  counter = signal(0);
+  ComputedCounter = computed(() => {
+    let count = this.counter();
+    if (count % 2 != 0) count = count + 2;
+    else return null;
+    return count;
+  });
+  increment() {
+    // this.counter.set(this.counter() + 1);
+    // this.counter.update((ele) => ele + 1);
+    this.counterService.increment();
   }
 }

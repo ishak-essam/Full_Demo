@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
+  input,
   Input,
   OnChanges,
   SimpleChanges,
@@ -15,13 +16,14 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrl: './product.component.css',
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductComponent implements AfterViewInit {
-  @Input() product: Product;
+  // @Input() product: Product;
+  product = input.required<Product>({ alias: 'Ishak' });
   constructor(
     private http: HttpClient,
-    @Attribute('ChangeLevel') private  ex: string
+    @Attribute('ChangeLevel') private ex: string
   ) {
     console.log('ChangeLevel', ex);
   }
@@ -33,6 +35,6 @@ export class ProductComponent implements AfterViewInit {
   }
   NoDate: string = 'No Date';
   oncourseTitle(newTtitle: string) {
-    this.product.Description = newTtitle;
+    this.product()!.Description = newTtitle;
   }
 }

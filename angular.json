@@ -9,7 +9,8 @@
         "sourceLocale": "en-US",
         "locales": {
           "ar": {
-            "translation": "src/app/localization/messages.ar.xlf"
+            "translation": "src/app/localization/messages.ar.xlf",
+             "baseHref": "/ar/"
           }
         }
       },
